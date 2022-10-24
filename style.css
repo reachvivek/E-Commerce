@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&family=Quicksand&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -47,8 +47,8 @@ a:hover{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 2rem;
-    min-height: 8rem;
+    padding: 1.5rem;
+    min-height: 7rem;
     text-align: center;
     background-color: gray;
 }
@@ -60,7 +60,7 @@ a:hover{
 }
 
 .container{
-    margin: 2rem 5rem;
+    margin: 3rem 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,34 +68,93 @@ a:hover{
 
 .container img{
     margin: 2rem;
-    height:200px;
-    width: 200px;
+    height:250px;
+    width: 250px;
+    object-fit: cover;
+    overflow: hidden;
 }
 
-.product-type h3{
-    font-family: "Metal Mania";
+.product-type{
+    font-family: "Metal Mania", cursive;
+    font-size: 2rem;
 }
 
 .products{
+    margin: 3rem 0;
     display: flex;
     flex-direction: row;
 }
 
+.product{
+    margin: 0 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.product h3{
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+}
+
+.product-details{
+    display: flex;
+    flex-direction: row;
+}
+
+.product-details p{
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.product-details button{
+    background-color: #56CDF3;
+    padding: 0.5rem;
+    font-weight: 700;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-left: 5rem;
+}
+
+.product-details button:hover{
+    background-color: #0d94af;
+}
+
+.bottom-button{
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 3rem 0
+}
+
+.bottom-button button{
+    background-color: gray;
+    padding: 1rem;
+    font-weight: 900;
+    border: none;
+    color: #56CDF3;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
 .footer{
     position:static;
-    padding: 1rem;
+    padding: 2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     max-width: 100vw;
-    min-height: 2rem;
+    min-height: 3rem;
     background-color: #212020;
     color: white;
     bottom: 0px;
 }
 
 .footer-links{
+    padding: 1rem;
     right: 4rem;
     margin: 0 3rem;
 }
@@ -105,7 +164,9 @@ a:hover{
 }
 
 .footer h2{
+    padding: 0.5rem;
     cursor: pointer;
+    font-size: 2.5rem;
     letter-spacing: 1px;
     left: 4rem;
 }
