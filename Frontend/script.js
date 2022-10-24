@@ -1,3 +1,5 @@
+// Global Variables
+const url=`http://localhost:3000/products`
 const text=" The Generics "
 const products=document.getElementById('products')
 const qty=document.querySelector('.cart-number')
@@ -8,16 +10,51 @@ const closeCart=document.getElementById('close')
 const items=document.querySelectorAll('.item')
 const total=document.getElementById('total')
 const remove=document.getElementById('items')
-console.log(items)
 
+let count=0, cartTotal=0.00
+
+//Event Listeners
 remove.addEventListener('click', removeItem)
-
 seeCart.addEventListener('click', showCart)
 cart.addEventListener('click', showCart)
 products.addEventListener('click', addToCart)
 closeCart.addEventListener('click', hideCart)
 
-let count=0, cartTotal=0.00
+
+// Show Products
+async function showProducts(){
+    await axios({
+        method: 'get',
+        url: url
+    }).then(response=>{
+        response.data.map(product=>{
+            let div=document.createElement('div')
+            div.classList.add('product')
+            let h3=document.createElement('h3')
+            h3.innerHTML=product.title
+            let img=document.createElement('img')
+            img.src=product.imageUrl
+            let subdiv=document.createElement('div')
+            subdiv.classList.add('product-details')
+            let p=document.createElement('p')
+            p.innerHTML=`₹ ${product.price}`
+            let button=document.createElement('button')
+            button.id=product.id
+            button.innerHTML="ADD TO CART"
+            subdiv.appendChild(p)
+            subdiv.appendChild(button)
+            div.appendChild(h3)
+            div.appendChild(img)
+            div.appendChild(subdiv)
+            products.appendChild(div)
+        })
+
+    }).catch(err=>console.log(err))
+}
+
+//On DOM Content Loaded
+window.addEventListener('DOMContentLoaded', showProducts)
+
 
 function showCart(){
     document.getElementById('popup-container').style.display="flex"
