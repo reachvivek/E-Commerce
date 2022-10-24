@@ -52,6 +52,100 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+    overflow: auto;
+}
+
+.cart-header{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    justify-content: start;
+    top: 7.8rem;
+}
+
+.cart-header p{
+    font-size: 1.5rem;
+    margin: 0 2.8rem;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.cart-header span{
+    text-decoration: underline;
+    font-size: 1.5rem;
+    margin: 0 1rem 0 5rem;
+    font-weight: 700;
+}
+
+.items{
+    top: 10rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.total{
+    margin-top: 1rem;
+    margin-left: 20rem;
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+#total{
+    font-weight: 400;
+}
+
+.item{
+    height: 6rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin: .5rem 0;
+    display: none;
+}
+
+.item p{
+    margin: 2rem 1rem;
+    font-size: 1rem;
+}
+
+.item button{
+    margin: 1rem 0;
+    width: 6rem;
+    height: 3rem;
+    padding: .2rem 1rem;
+    background-color: #E64D4C;
+    color: white;
+    border: #E64D4C;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: .5rem;
+}
+
+.item button:hover{
+    background-color: #cf2020;
+}
+
+.item input{
+    margin: 1rem 1rem;
+    padding: .2rem 0.5rem;
+    border: 2px solid #56CDF3;
+    border-radius: .5rem;
+    text-align: center;
+    width: 2rem;
+    height: 2.4rem;
+}
+
+
+.item img{
+    height: 6rem;
+    width: 6rem;
+    border-radius: 1rem;
+    margin: 0 1rem;
 }
 
 .popup-container h1{
@@ -81,6 +175,7 @@
 }
 
 .purchase{
+    margin: 1rem 0;
     position:relative;
     background-color: #56CDF3;
     padding: 0.5rem;
@@ -90,6 +185,7 @@
     color: white;
     cursor: pointer;
     border-radius: .5rem;
+    width: 10rem;
 }
 
 .purchase:hover{
