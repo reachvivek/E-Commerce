@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>E-Commerce Store</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar">
+        <ul class="navbar-container">
+            <li class="active"><a href="./index.html">HOME</a></li>
+            <li><a href="./store.html">STORE</a></li>
+            <li><a href="./about.html">ABOUT</a></li>
+            <li id='cart' class="cart"><a href="#">CART<span class="cart-number">0</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Cart Section -->
+    <div id="popup-container" class="popup-container">
+        <button id="close" class="close-popup">x</button>
+        <h1>CART</h1>
+        <button class="purchase">PURCHASE</button>
+    </div>
+
+    <!-- Store Header -->
+    <div id="header" class="header-container">
+        <h1>The Generics</h1>
+    </div>
+
+    <!-- Products -->
+    <div id="products" class="container">
+        <h3 class="product-type">Music</h3>
+        <div class="products">
+            <div class="product">
+                <h3>Album 1</h3>
+                <img src="https://images.unsplash.com/photo-1561211919-1947abbbb35b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aW5rJTIwaW4lMjB3YXRlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
+                <div class="product-details">
+                    <p>₹ 549.99</p>
+                    <button id="1">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product">
+                <h3>Album 2</h3>
+                <img src="https://images.unsplash.com/photo-1599419879424-94fe33d40943?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="">
+                <div class="product-details">
+                    <p>₹ 749.99</p>
+                    <button id="2">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="products">
+            <div class="product">
+                <h3>Album 3</h3>
+                <img src="https://prasadyash2411.github.io/ecom-website/img/Album%203.png" alt="">
+                <div class="product-details">
+                    <p>₹ 439.99</p>
+                    <button id="3">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product">
+                <h3>Album 4</h3>
+                <img src="https://prasadyash2411.github.io/ecom-website/img/Album%204.png" alt="">
+                <div class="product-details">
+                    <p>₹ 849.99</p>
+                    <button id="4">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="product-type">Merch</h3>
+
+        <div class="products">
+            <div class="product">
+                <h3>T-Shirt</h3>
+                <img src="https://prasadyash2411.github.io/ecom-website/img/Shirt.png" alt="">
+                <div class="product-details">
+                    <p>₹ 499.99</p>
+                    <button id="5">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product">
+                <h3>Coffee Cup</h3>
+                <img src="https://prasadyash2411.github.io/ecom-website/img/Cofee.png" alt="">
+                <div class="product-details">
+                    <p>₹ 349.99</p>
+                    <button id="6">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom-button">
+        <button>See the Cart</button>
+    </div>
+
+    <div id="toast"></div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <h2>The Generics</h2>
+        <div class="footer-links">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/174/174872.png" alt="Spotify"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt=""></a>
+        </div>
+    </div> 
+    <script src="./script.js"></script>
+</body>
+</html>
