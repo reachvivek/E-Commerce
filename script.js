@@ -74,6 +74,8 @@ function addToCart(e){
 }
 
 function removeItem(e){
+    count--
+    qty.innerHTML=count
     switch(e.target.id){
         case '1':   {
             items[0].style.display="none"
