@@ -12,33 +12,28 @@
     <nav id="navbar" class="navbar">
         <ul class="navbar-container">
             <li><a href="./index.html">HOME</a></li>
-            <li class="active"><a href="./store.html">STORE</a></li>
-            <li><a href="./orders.html">ORDERS</a></li>
+            <li><a href="./store.html">STORE</a></li>
+            <li class="active"><a href="./orders.html">ORDERS</a></li>
             <li><a href="./about.html">ABOUT</a></li>
-            <li id='cart' class="cart"><a href="#">CART<span class="cart-number">0</span></a></li>
         </ul>
     </nav>
 
-    <!-- Cart Section -->
-    <div id="popup-container" class="popup-container">
-        <button id="close" class="close-popup">x</button>
-        <h1>CART</h1>
-        <div class="cart-header"><p>ITEM</p><span>PRICE</span><p>QUANTITY</p></div>
-        <ul class="items" id="items"></ul>
+    <!-- Store Header -->
+    <div id="header" class="header-container">
+        <h1>The Generics</h1>
     </div>
 
-    <!-- Store Header -->
-    <div id="header" class="header-container"><h1>The Generics</h1></div>
+    <div class="order-history-header">
+        <h1>Orders</h1>
+        <p>Check the status of your recent orders, manage returns, and track your delivery</p>
+    </div>
 
-    <!-- Products Container-->
-    <div id="products" class="container"></div>
-
-    <!-- Pages Container -->
-    <div id="pages-button"></div>
-
-    <div class="bottom-button"><button id="open-cart">See the Cart</button></div>
-
-    <div id="toast"></div>
+    <div class='order-history-container'>
+        <ul class="order-list">
+            <li id='default' class="default"><p>No Orders Yet!</p></li>
+        </ul>
+    </div>
+    
 
     <!-- Footer -->
     <div class="footer">
@@ -50,6 +45,6 @@
         </div>
     </div> 
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <script src="./script.js"></script>
+    <script src="./orders.js"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ const Orders=sequelize.define('orders', {
         allowNull:false,
     },
     items:{
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull:false
     },
     totalPrice:{

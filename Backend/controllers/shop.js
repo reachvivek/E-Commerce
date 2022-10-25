@@ -188,8 +188,9 @@ exports.postCartDeleteProduct = (req, res, next) => {
 };
 
 exports.getOrders = (req, res, next) => {
-  
-
+  Orders.findAll().then(response=>{
+    res.status(200).send(response)
+  }).catch(err=>console.log(err)) 
 };
 
 exports.createOrder = (req, res, next) => {
@@ -201,7 +202,9 @@ exports.createOrder = (req, res, next) => {
     .then(cart => {
       return cart.getProducts()})
       .then(cartItems => {
-          cartItems.map(i=>items.push(i.id))
+          cartItems.map(i=>{
+            items.push(i)
+          })
           CartItem.destroy({
             where: {},
             truncate: true

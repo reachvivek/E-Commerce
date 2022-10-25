@@ -238,9 +238,12 @@ async function loadCart(e){
 
 //On DOM Content Loaded
 window.addEventListener('DOMContentLoaded', ()=>{
-    showProducts()
     loadCart()
+    showProducts()
 })
+
+
+
 
 // Place Order
 function createOrder(){

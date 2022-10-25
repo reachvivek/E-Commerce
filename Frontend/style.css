@@ -286,6 +286,75 @@
     padding: 1rem;
 }
 
+.order-history-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 5rem;
+}
+
+.order-history-header h1{
+    font-family: 'Metal Mania', cursive;
+    font-size: 2rem;
+    padding: .5rem;
+}
+
+.order-history-header p{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+}
+
+.order-history-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: start;
+    padding: 0rem 10rem;
+    margin: 0 10rem;
+    margin-bottom: 7rem;
+}
+
+.order-history-container li{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.order-history-container p{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+}
+
+.product-history p{
+    padding: 4rem 4rem;
+}
+
+.order-history-container img{
+    width: 8rem;
+    height: 8rem;
+    margin: 1.5rem 0;
+}
+
+#order-id{
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+#order-price{
+    padding-left: 25rem;
+    font-weight: normal;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+.default p{
+    display: flex;
+    padding: 0 12rem;
+    font-size: 3rem;
+}
+
 .tours-container{
     margin: 3rem 6rem;
     max-width: 90vw;
