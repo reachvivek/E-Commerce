@@ -2,6 +2,7 @@
 const shopUrl=`http://localhost:3000/pagination/`
 const productsUrl=`http://localhost:3000/products`
 const cartUrl=`http://localhost:3000/cart`
+const orderUrl=`http://localhost:3000/orders`
 const text=" The Generics "
 const products=document.getElementById('products')
 const qty=document.querySelector('.cart-number')
@@ -10,8 +11,8 @@ const cart=document.getElementById('cart')
 const seeCart=document.getElementById('open-cart')
 const closeCart=document.getElementById('close')
 const items=document.getElementById('items')
-const total=document.getElementById('total')
 const pages=document.getElementById('pages-button')
+var totalPrice=0.00;
 
 //Event Listeners
 pages.addEventListener('click', showProducts)
@@ -97,7 +98,7 @@ async function showProducts(e){
 
     }).catch(err=>console.log(err))
 }
-
+// Show Cart
 async function loadCart(e){
     let pageNo;
     try {
@@ -218,13 +219,17 @@ async function loadCart(e){
         p.innerHTML="Total "
         let total=document.createElement('span')
         total.id="total"
+        totalPrice=response.data.totalPrice
         total.innerHTML=`₹ ${parseFloat(response.data.totalPrice).toFixed(2)}`
         p.appendChild(total)
         items.appendChild(p)
         let button=document.createElement('button')
         button.classList.add('purchase')
-        button.innerHTML="PURCHASE"
+        button.innerHTML="ORDER NOW"
         items.appendChild(button)
+
+        const order=document.querySelector('.purchase')
+        order.addEventListener('click', createOrder)
     }).catch(err=>console.log(err)).then(()=>{
         const cart_pages=document.querySelector('.pages-container')
         cart_pages.addEventListener('click', loadCart)
@@ -236,6 +241,21 @@ window.addEventListener('DOMContentLoaded', ()=>{
     showProducts()
     loadCart()
 })
+
+// Place Order
+function createOrder(){
+    if(totalPrice==0.00|| totalPrice<1){
+        alert('Cart is Empty!')
+        return
+    }
+    axios({
+        method: 'post',
+        url: `${orderUrl}/${totalPrice}`
+    }).then(response=>{
+        alert(`Order Successfully Placed With Order ID: ${response.data.orderId}`)
+        location.reload()
+    }).catch(err=>console.log(err))
+}
 
 //Show Cart Popup Modal
 function showCart(){
