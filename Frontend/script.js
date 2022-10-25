@@ -1,4 +1,5 @@
 // Global Variables
+const shopUrl=`http://localhost:3000/pagination/`
 const productsUrl=`http://localhost:3000/products`
 const cartUrl=`http://localhost:3000/cart`
 const text=" The Generics "
@@ -10,8 +11,10 @@ const seeCart=document.getElementById('open-cart')
 const closeCart=document.getElementById('close')
 const items=document.getElementById('items')
 const total=document.getElementById('total')
+const pages=document.getElementById('pages-button')
 
 //Event Listeners
+pages.addEventListener('click', showProducts)
 seeCart.addEventListener('click', showCart)
 cart.addEventListener('click', showCart)
 products.addEventListener('click', addToCart)
@@ -20,12 +23,21 @@ items.addEventListener('click', removeItem)
 
 
 // Show Products
-async function showProducts(){
+async function showProducts(e){
+    let pageNo;
+    try {
+        pageNo=e.target.id
+    }
+    catch(err){
+        pageNo=1
+    }
     await axios({
         method: 'get',
-        url: productsUrl
+        url: `${shopUrl}${pageNo}`
     }).then(response=>{
-        response.data.map(product=>{
+        products.innerHTML=""
+        pages.innerHTML=""
+        response.data.products.map(product=>{
             let div=document.createElement('div')
             div.classList.add('product')
             let h3=document.createElement('h3')
@@ -47,19 +59,62 @@ async function showProducts(){
             products.appendChild(div)
         })
 
+        if (response.data.lastPage>=2){
+            if(response.data.currentPage==response.data.lastPage){
+                let cur_btn=document.createElement('button')
+                cur_btn.innerHTML=1
+                cur_btn.id=1
+                pages.appendChild(cur_btn)
+            }
+    
+            if(response.data.hasPreviousPage){
+                let cur_btn=document.createElement('button')
+                cur_btn.innerHTML=response.data.previousPage
+                cur_btn.id=response.data.previousPage
+                pages.appendChild(cur_btn)
+            }
+            if(response.data.currentPage){
+                let cur_btn=document.createElement('button')
+                cur_btn.classList.add('active')
+                cur_btn.innerHTML=response.data.currentPage
+                cur_btn.id=response.data.currentPage
+                pages.appendChild(cur_btn)
+            }
+            if(response.data.hasNextPage){
+                let cur_btn=document.createElement('button')
+                cur_btn.innerHTML=response.data.nextPage
+                cur_btn.id=response.data.nextPage
+                pages.appendChild(cur_btn)
+            }
+            if(response.data.currentPage==1){
+                let cur_btn=document.createElement('button')
+                cur_btn.innerHTML=response.data.lastPage
+                cur_btn.id=response.data.lastPage
+                pages.appendChild(cur_btn)
+            }
+        }
+
+
     }).catch(err=>console.log(err))
 }
 
-async function loadCart(){
+async function loadCart(e){
+    let pageNo;
+    try {
+        pageNo=e.target.id
+    }
+    catch(err){
+        pageNo=1
+    }
+
     await axios({
         method: 'get',
-        url: `${cartUrl}`
+        url: `${cartUrl}/${pageNo}`
     }).then(response=>{
-        qty.innerHTML=response.data.length
+        console.log(response)
+        qty.innerHTML=response.data.totalItems
         items.innerHTML=""
-        let cartTotal=0.00
-        response.data.map(item=>{
-            cartTotal+=item.price
+        response.data.cartItems.map(item=>{
             let li=document.createElement('li')
             li.classList.add('item')
             let img=document.createElement('img')
@@ -82,19 +137,98 @@ async function loadCart(){
             li.appendChild(button)
             items.appendChild(li)
         })
+
+        // Pagination Buttons for Cart
+        let div=document.createElement('div')
+        div.innerHTML=""
+        div.classList.add('pages-container')
+        if(response.data.lastPage==2){
+            if(response.data.hasPreviousPage){
+                let cur_btn=document.createElement('button')
+                cur_btn.innerHTML=response.data.previousPage
+                cur_btn.id=response.data.previousPage
+                cur_btn.classList.add('cart-pages')
+                div.appendChild(cur_btn)
+            }
+            if(response.data.currentPage){
+                let cur_btn2=document.createElement('button')
+                cur_btn2.innerHTML=response.data.currentPage
+                cur_btn2.id=response.data.currentPage
+                cur_btn2.classList.add('cart-pages-active')
+                div.appendChild(cur_btn2)
+            }
+            if(response.data.hasNextPage){
+                let cur_btn2=document.createElement('button')
+                cur_btn2.innerHTML=response.data.nextPage
+                cur_btn2.id=response.data.nextPage
+                cur_btn2.classList.add('cart-pages')
+                div.appendChild(cur_btn2)
+            }
+    
+            items.appendChild(div)
+        }
+        else if(response.data.lastPage>2){
+            if(response.data.currentPage==response.data.lastPage){
+                let cur_btn=document.createElement('button')
+                cur_btn.innerHTML=1
+                cur_btn.id=1
+                cur_btn.classList.add('cart-pages')
+                div.appendChild(cur_btn)
+            }
+            if(response.data.hasPreviousPage){
+                let cur_btn=document.createElement('button')
+                cur_btn.innerHTML=response.data.previousPage
+                cur_btn.id=response.data.previousPage
+                cur_btn.classList.add('cart-pages')
+                div.appendChild(cur_btn)
+            }
+            if(response.data.currentPage){
+                let cur_btn2=document.createElement('button')
+                cur_btn2.innerHTML=response.data.currentPage
+                cur_btn2.id=response.data.currentPage
+                cur_btn2.classList.add('cart-pages-active')
+                div.appendChild(cur_btn2)
+            }
+            if(response.data.hasNextPage){
+                let cur_btn2=document.createElement('button')
+                cur_btn2.innerHTML=response.data.nextPage
+                cur_btn2.id=response.data.nextPage
+                cur_btn2.classList.add('cart-pages')
+                div.appendChild(cur_btn2)
+            }
+            if(response.data.lastPage!==response.data.currentPage && !response.data.hasNextPage){
+                let cur_btn2=document.createElement('button')
+                cur_btn2.innerHTML=response.data.lastPage
+                cur_btn2.id=response.data.lastPage
+                cur_btn2.classList.add('cart-pages')
+                div.appendChild(cur_btn2)
+            }
+            if(response.data.currentPage==1){
+                let cur_btn2=document.createElement('button')
+                cur_btn2.innerHTML=response.data.lastPage
+                cur_btn2.id=response.data.lastPage
+                cur_btn2.classList.add('cart-pages')
+                div.appendChild(cur_btn2)
+            }
+            items.appendChild(div)
+        }
+
         let p=document.createElement('p')
         p.classList.add('total')
         p.innerHTML="Total "
         let total=document.createElement('span')
         total.id="total"
-        total.innerHTML=`₹ ${parseFloat(cartTotal).toFixed(2)}`
+        total.innerHTML=`₹ ${parseFloat(response.data.totalPrice).toFixed(2)}`
         p.appendChild(total)
         items.appendChild(p)
         let button=document.createElement('button')
         button.classList.add('purchase')
         button.innerHTML="PURCHASE"
         items.appendChild(button)
-    }).catch(err=>console.log(err))
+    }).catch(err=>console.log(err)).then(()=>{
+        const cart_pages=document.querySelector('.pages-container')
+        cart_pages.addEventListener('click', loadCart)
+    })
 }
 
 //On DOM Content Loaded
@@ -128,6 +262,9 @@ async function addToCart(e){
 }
 
 function removeItem(e){
+    if (e.target.innerHTML!=="REMOVE"){
+        return
+    }
     axios({
         method: 'post',
         url : `${cartUrl}-delete-item/${e.target.id}`

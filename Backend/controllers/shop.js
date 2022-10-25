@@ -1,6 +1,8 @@
 const Product = require('../models/product');
 const Cart = require('../models/cart');
 
+const ITEMS_PER_PAGE=2
+
 exports.getProducts = (req, res, next) => {
   Product.findAll()
     .then(products => {
@@ -14,15 +16,6 @@ exports.getProducts = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
   console.log(req.params)
-  // Product.findAll({ where: { id: prodId } })
-  //   .then(products => {
-  //     res.render('shop/product-detail', {
-  //       product: products[0],
-  //       pageTitle: products[0].title,
-  //       path: '/products'
-  //     });
-  //   })
-  //   .catch(err => console.log(err));
   Product.findByPk(prodId)
     .then(product => {
       res.status(200).send(product)
@@ -30,38 +23,76 @@ exports.getProduct = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-exports.getIndex = (req, res, next) => {
-  Product.findAll()
+exports.getIndex = async (req, res, next) => {
+  console.log(req.params)
+  var totalProducts;
+  const page = +req.params.pageNo || 1;
+  let totalItems=Product.findAll().then(response=>{
+    totalProducts=response.length
+  }).catch(err=>console.log(err))
+
+  await totalItems;
+
+  Product.findAll({offset: (page-1)*ITEMS_PER_PAGE, limit: ITEMS_PER_PAGE})
     .then(products => {
-      res.render('shop/index', {
-        prods: products,
-        pageTitle: 'Shop',
-        path: '/'
+      res.status(200).send({
+        products: products,
+        currentPage: page,
+        hasNextPage: ITEMS_PER_PAGE * page < totalProducts,
+        hasPreviousPage: page > 1,
+        nextPage:page+1,
+        previousPage:page-1,
+        lastPage:Math.ceil(totalProducts/ITEMS_PER_PAGE),
+        totalItems: totalProducts
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
-exports.getCart = (req, res, next) => {
-  req.user
+
+exports.getCart =async (req, res, next) => {
+  var totalCartItems;
+  var totalPrice=0.00;
+  const page = +req.params.pageNo || 1;
+  let totalItems=req.user
     .getCart()
     .then(cart => {
       return cart
         .getProducts()
         .then(products => {
-          console.log(products)
-          res.status(200).send(products)
-          // res.render('shop/cart', {
-          //   path: '/cart',
-          //   pageTitle: 'Your Cart',
-          //   products: products
-          // });
+          totalCartItems=products.length
+          products.map(i=>totalPrice+=i.price)
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+  
+  await totalItems
+
+  req.user
+    .getCart()
+    .then(cart => {
+      return cart
+        .getProducts({offset: (page-1)*ITEMS_PER_PAGE, limit: ITEMS_PER_PAGE})
+        .then(cartItems => {
+          res.status(200).send({
+            cartItems: cartItems,
+            currentPage: page,
+            hasNextPage: ITEMS_PER_PAGE * page < totalCartItems,
+            hasPreviousPage: page > 1,
+            nextPage:page+1,
+            previousPage:page-1,
+            lastPage:Math.ceil(totalCartItems/ITEMS_PER_PAGE),
+            totalItems: totalCartItems,
+            totalPrice:totalPrice
+          })
         })
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
+
 };
 
 exports.addToCart = (req, res, next) => {

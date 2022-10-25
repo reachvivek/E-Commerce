@@ -97,6 +97,71 @@
     font-weight: 400;
 }
 
+#pages-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#pages-button button{
+    width: 3rem;
+    margin: 0 1rem;
+    background-color: #56CDF3;
+    border-color: white;
+    color: white;
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    border: 2px solid #56CDF3;
+    cursor: pointer;
+    transition: width .2s ease-in-out;
+}
+
+#pages-button button:hover{
+    width: 3.5rem;
+}
+
+#pages-button .active{
+    background-color: #0d94af;
+    border-color: #0d94af;
+}
+
+.pages-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cart-pages{
+    margin: 0 1rem;
+    background-color: #56CDF3;
+    color: white;
+    font-size: 1rem;
+    padding: .5rem;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+.cart-pages:hover{
+    background-color: white;
+    color: #000;
+}
+
+.cart-pages-active{
+    margin: 0 1rem;
+    background-color: #0d94af;
+    color: white;
+    font-size: 1rem;
+    padding: .5rem;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+.cart-pages-active:hover{
+    background-color: white;
+    color: #000;
+}
+
 .item{
     height: 6rem;
     width: 100%;
